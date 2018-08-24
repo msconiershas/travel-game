@@ -32,6 +32,8 @@ class App extends Component {
     this.onNameChange = this.onNameChange.bind(this)
     this.clearFields = this.clearFields.bind(this)
     this.handlePage = this.handlePage.bind(this)
+    this.handleClick = this.handleClick.bind(this)
+
   }
   
   // handler recieves the `e` event object
@@ -50,6 +52,7 @@ class App extends Component {
  };
   componentWillMount(){
     
+   
     this.getItems()
     if(this.props.currentRound === -1)
     this.props.fetchData();
@@ -148,7 +151,7 @@ class App extends Component {
   componentDidUpdate(prevProps) {
     console.log(prevProps.image)
     console.log(this.props.image)
-    
+
     if( (this.props.image !== prevProps.image)) // Check if it's a new user, you can also use some unique property, like the ID  (this.props.user.id !== prevProps.user.id)
     {
           console.log('hey')
@@ -166,8 +169,17 @@ class App extends Component {
     else if(this.props.fetching === true) { return <h1> Loading...</h1>}
     else {return <h1> Loading </h1>}
   }
+
+  getInitialState() {
+    return ({isClicked : false})    
+  }
+
+  handleClick() {
+    this.setState({isClicked : !this.state.isClicked});
+  }
+
   render() {
-          
+    var elementClass = this.state.isClicked ? 'rotated' : ''; 
     return (
       <div>
       <div className="content">
@@ -176,7 +188,7 @@ class App extends Component {
         <form   onSubmit={this.onSubmitForm.bind(this)}   id="add-cafe-form">
                <input type="text" value={this.state.name} name="name" placeholder="Cafe name" onChange={this.onNameChange}></input>
                 <input type="text" value={this.state.city} name="city" placeholder="Cafe city" onChange={this.onCityChange}></input>
-                <button  >Add Cafe</button>
+                <button>Add Cafe</button>
         </form>
 
          <ul id='cafe-list'>
@@ -188,12 +200,11 @@ class App extends Component {
           );
         })}
         </ul>
-
-          <div >
-      </div>
         
       </div>
         {this.handlePage()}
+        <div id="earth"></div>
+        <div className={elementClass} onClick={this.handleClick} >some text</div>
       </div>
       
     );
