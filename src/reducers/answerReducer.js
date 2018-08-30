@@ -41,34 +41,16 @@ export default function(state = defaults, action) {
 
 			let newState = Object.assign({}, state);
 			const array = []
-			console.log(newState.image)
-
+			console.log(action.payload.source)
 
 			newState.chosenCountry = action.payload.chosenCountry;
 			newState.answerOptions = action.payload.answerOptions;
+			newState.image = action.payload.source;
 			newState.currentRound++;
 			newState.fetching = false
 
-			fire.firestore()
-      		.collection('countries')
-      		.doc(newState.chosenCountry.country).get()
-      		.then(snap => {
-       		   array.push({
-            imgs: snap.data().unusedImages
-          })
-
-          const t = getRandomNumber(0, array[0].imgs.length - 1)
-          const image = array[0].imgs[t]
-
-      const source = newState.chosenCountry.source
-        + image
-         newState.image = source
-         	console.log(source)
-         	
-         	
-    		})
-      	console.log('done')
-      	return newState
+      		console.log('done')
+      		return newState
         
 
 

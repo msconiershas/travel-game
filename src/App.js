@@ -59,7 +59,7 @@ class App extends Component {
     this.props.fetchData();
     //this.props.getName()
 
-    const count = fire.firestore().collection('countries')
+    const count = fire.collection('countries')
     
     var i;
     var j;
@@ -131,7 +131,7 @@ class App extends Component {
 
   getItems() {
     const matches = [];
-      fire.firestore().collection('cafes')
+      fire.collection('cafes')
       .orderBy('city').onSnapshot(snapshot => {
         let changes = snapshot.docChanges();
         changes.forEach((change, index) => {
