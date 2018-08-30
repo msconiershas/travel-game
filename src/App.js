@@ -12,6 +12,7 @@ import { getName } from './actions/getName'
 import Question from './components/Question'
 import StartPage from './components/StartPage'
 
+
 function getRandomNumber(min, max) {
   return Math.floor(Math.random() * (max + 1 - min) + min);
 }
@@ -149,9 +150,8 @@ class App extends Component {
 
       }
   componentDidUpdate(prevProps) {
-    console.log(prevProps.image)
-    console.log(this.props.image)
-
+    console.log('component updated')
+    console.log('user score..', this.props.userScore)
     if( (this.props.image !== prevProps.image)) // Check if it's a new user, you can also use some unique property, like the ID  (this.props.user.id !== prevProps.user.id)
     {
           console.log('hey')
@@ -159,14 +159,15 @@ class App extends Component {
     }
 }
   handlePage() {
-    if(this.props.currentRound === 0) {
+    if(this.props.fetching === true) { return <h1> Loading...</h1>}
+    else if(this.props.currentRound === 0) {
         return <StartPage />
     }
     else if(this.props.currentRound > 0) {
       console.log("question page")
       return <Question />
     }
-    else if(this.props.fetching === true) { return <h1> Loading...</h1>}
+    
     else {return <h1> Loading </h1>}
   }
 
@@ -216,6 +217,7 @@ const mapStateToProps = state => ({
   currentRound: state.answer.currentRound,
   answerOptions: state.answer.answerOptions,
   fetching: state.answer.fetching,
+  userScore: state.answer.userScore,
   image: state.answer.image
 })
 

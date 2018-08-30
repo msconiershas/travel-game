@@ -45,11 +45,11 @@ class Question extends Component {
     }
     else return false
   }
-  nextRound() {
-
+  nextRound(e) {
+    this.props.fetchData()
     if(this.state.selectionMade) {
       this.setState({ selectionMade: false});
-      this.props.fetchData()
+      //this.props.fetchData()
       //this.props.getName()
       this.setState({udpated: true})
       
@@ -71,7 +71,7 @@ class Question extends Component {
       : (answer = false);
     console.log(answer)
     this.props.checkAnswer(answer);
-    this.props.fetchData()
+    //this.props.fetchData()
     
   }
 
@@ -82,6 +82,7 @@ class Question extends Component {
       <div>
         <div>
          <h1> What country is this?</h1>
+         <h3> User Score {this.props.userScore} </h3>
           <div  className='start'>
             <div >
              
@@ -126,6 +127,7 @@ const mapStateToProps = state => ({
   chosenCountry: state.answer.chosenCountry,
   answerOptions: state.answer.answerOptions,
   answerIndex: state.answer.answerIndex,
+  userScore: state.answer.userScore,
   image: state.answer.image
 })
 

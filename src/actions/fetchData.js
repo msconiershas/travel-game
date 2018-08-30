@@ -5,6 +5,7 @@ import fire from '../fire';
 export const fetchData = () => async (dispatch) => {
   dispatch({type: FETCH_PENDING});
 
+  const state = {}
 	const answerOptions = []
 	const ref = fire
 	.firestore()
@@ -28,9 +29,6 @@ export const fetchData = () => async (dispatch) => {
            	})
          })
 
-	
-
-		
 		ref.where("random", '>', random)
            .orderBy("random")
            .limit(1).get()
@@ -42,13 +40,14 @@ export const fetchData = () => async (dispatch) => {
                   .orderBy('random')
                    .limit(1).get()
                    	.then(snap => {
+                        state.chosenCountry = snap.docs[0].data()
                    		dispatch( {
 							type: FETCH_DATA,
 							payload: {
 								chosenCountry: snap.docs[0].data(),
 								answerOptions: answerOptions
 							} 
-					})
+					    })
                    	})
                    		}
                  else
