@@ -60,7 +60,7 @@ li{
     color: #555;
     position: relative;
     border-bottom: 1px solid #e6e6e6;
-    height: 46px;
+    height: 26px;
 }
 
 li:nth-child(even){

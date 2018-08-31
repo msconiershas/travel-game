@@ -60,7 +60,6 @@ export default function(state = defaults, action) {
 			
 			let newQuiz = Object.assign({}, state)
 			
-			console.log(newQuiz.currentRound)
 			newQuiz.answerIndex = getRandomNumber(0, 3);
 
 			newQuiz.currentRound++;

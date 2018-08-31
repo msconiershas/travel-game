@@ -70,9 +70,7 @@ class Question extends Component {
       ? (answer = true)
       : (answer = false);
     console.log(answer)
-    this.props.checkAnswer(answer);
-    //this.props.fetchData()
-    
+    this.props.checkAnswer(answer);    
   }
 
   
@@ -91,9 +89,10 @@ class Question extends Component {
             
           </div>
           {this.renderAnswers}
+          <ul>
           {this.props.answerOptions.map(
           (item, index) => (
-            <h4
+            <h4 className="country_options"
               onClick={() => this.handleAnswerSelection(item, index)}
               key={index}
               className={
@@ -101,11 +100,11 @@ class Question extends Component {
                 item.name === this.props.chosenCountry.country
                   ? "green-bg"
                   : this.state.selectionMade &&
-                    
-                    index === this.state.chosenIndex
+                    index === this.state.chosenIndex &&
+                    item.name !== this.props.chosenCountry.country
                     ? "red-bg"
-                    : this.state.selectionMade &&
-                      index !== this.state.answerIndex
+                    : !this.state.selectionMade 
+                      
                       ? "no-hover"
                       : ""
               }
@@ -114,6 +113,7 @@ class Question extends Component {
             </h4>
           )
         )}
+        </ul>
         <button onClick={this.nextRound}> Next Round</button>
          </div>
          

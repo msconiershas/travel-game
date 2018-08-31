@@ -22,7 +22,7 @@ class StartPage extends Component {
 	return ( 
 
 		<div>
-			<h1> Welcome to Travel Quiz </h1>
+			<h1> Welcome  </h1>
 			<img id="banner" src={MapImage} alt='' />
 			<div>
 			<button onClick={this.startQuiz} > Start </button>
