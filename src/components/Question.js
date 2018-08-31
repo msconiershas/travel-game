@@ -34,9 +34,7 @@ class Question extends Component {
   renderAnswers() {
     if (this.props.chosenCountry && this.props.answerOptions) {
        const array = [];
-    console.log(this.props.answerOptions)
-      
-      
+    console.log(this.props.answerOptions) 
     }
   }
   ready() {
@@ -46,15 +44,13 @@ class Question extends Component {
     else return false
   }
   nextRound(e) {
+    e.preventDefault()
     this.props.fetchData()
     if(this.state.selectionMade) {
       this.setState({ selectionMade: false});
-      //this.props.fetchData()
-      //this.props.getName()
       this.setState({udpated: true})
       
     }
-    console.log(this.props.image)
 
   }
   handleAnswerSelection(item, index) {
@@ -77,22 +73,25 @@ class Question extends Component {
   render() {
     
     return (
-      <div>
+      <div className="main">
         <div>
          <h1> What country is this?</h1>
-         <h3> User Score {this.props.userScore} </h3>
+          <div className="progress-bar-container">
+          <div className="progress-bar" style={{ width: `${(this.props.currentRound*10)-10}%` }}/>
+        </div>
+         <h3 className='score'> User Score {this.props.userScore} </h3>
           <div  className='start'>
             <div >
              
             </div>
-            <img src={this.props.image} alt=''/>
+            <img className="country_image" src={this.props.image} alt='image option'/>
             
           </div>
           {this.renderAnswers}
           <ul>
           {this.props.answerOptions.map(
           (item, index) => (
-            <h4 className="country_options"
+            <li className="country_options"
               onClick={() => this.handleAnswerSelection(item, index)}
               key={index}
               className={
@@ -104,17 +103,16 @@ class Question extends Component {
                     item.name !== this.props.chosenCountry.country
                     ? "red-bg"
                     : !this.state.selectionMade 
-                      
                       ? "no-hover"
                       : ""
               }
             >
               {item.name}
-            </h4>
+            </li>
           )
         )}
         </ul>
-        <button onClick={this.nextRound}> Next Round</button>
+        <button className="next_button" onClick={this.nextRound}> Next Round</button>
          </div>
          
       </div>
@@ -128,6 +126,7 @@ const mapStateToProps = state => ({
   answerOptions: state.answer.answerOptions,
   answerIndex: state.answer.answerIndex,
   userScore: state.answer.userScore,
+  currentRound: state.answer.currentRound,
   image: state.answer.image
 })
 
