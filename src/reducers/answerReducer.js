@@ -1,4 +1,4 @@
-import { FETCH_PENDING, FETCH_SUCCESS, FETCH_FAILURE, FETCH_DATA, START_QUIZ, CHECK_ANSWER } from '../assets/types'
+import { NEW_QUIZ, FETCH_PENDING, FETCH_SUCCESS, FETCH_FAILURE, FETCH_DATA, START_QUIZ, CHECK_ANSWER } from '../assets/types'
 import defaults from '../assets/defaults'
 import fire from '../fire'
 import {handleActions} from 'redux-actions';
@@ -49,11 +49,8 @@ export default function(state = defaults, action) {
 			newState.currentRound++;
 			newState.fetching = false
 
-      		console.log('done')
       		return newState
         
-
-
 		case START_QUIZ:
 
 			console.log(action.payload.quizType)
@@ -66,8 +63,14 @@ export default function(state = defaults, action) {
 			newQuiz.quizType = action.payload.quizType;
 			console.log(newQuiz.currentRound)
 
-
 			return newQuiz
+		case NEW_QUIZ:
+	      let newQuizData = Object.assign({}, state);
+	      newQuizData.currentRoundQuestions = [];
+	      newQuizData.currentRoundAnswer = -1;
+	      newQuizData.currentRound = 1;
+	      newQuizData.userScore = 0;
+	      return newQuizData;
 		case CHECK_ANSWER:
 	      let answeredQuestion = Object.assign({}, state);
 	      if (action.payload) answeredQuestion.userScore++;

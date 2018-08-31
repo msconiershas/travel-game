@@ -21,11 +21,13 @@ class StartPage extends Component {
 	render() {
 	return ( 
 
-		<div>
-			<h1> Welcome  </h1>
-			<img id="banner" src={MapImage} alt='' />
-			<div>
-			<button onClick={this.startQuiz} > Start </button>
+		<div className="start_page">
+			<h1 className="title"> Welcome  </h1>
+			<div className="banner">
+				<img src={MapImage} alt='' />
+			</div>
+			<div >
+			<button className="start_page_button" onClick={this.startQuiz} > Start </button>
 			</div>
 		</div>
 		

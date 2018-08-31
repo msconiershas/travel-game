@@ -1,5 +1,5 @@
 import defaults from '../assets/defaults'
-import { START_QUIZ } from '../assets/types'
+import { START_QUIZ, NEW_QUIZ } from '../assets/types'
 import fire from '../fire'
 
 export default function quizReducer(state = defaults, action) {
@@ -11,10 +11,17 @@ export default function quizReducer(state = defaults, action) {
 			let newQuiz = Object.assign({}, state)
 			
 
-			newQuiz.currentRound++;
+			newQuiz.currentRound = 0;
 			newQuiz.quizType = action.payload.quizType;
 
 			return state
+		case NEW_QUIZ:
+	      let newQuizData = Object.assign({}, state);
+	      newQuizData.currentRoundQuestions = [];
+	      newQuizData.currentRoundAnswer = -1;
+	      newQuizData.currentRound = 0;
+	      newQuizData.userScore = 0;
+	      return newQuizData;
 		default:
 			return state;
 }

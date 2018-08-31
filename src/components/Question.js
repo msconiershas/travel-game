@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 //import Gallery from './Components/GalleryComponent/Gallery'
 import { fetchData } from '../actions/fetchData'
-import { checkAnswer } from '../actions/checkAnswser'
+import { checkAnswer } from '../actions/checkAnswer'
 import { fetchDataRequest } from '../actions/fetchPending'
 import { connect } from 'react-redux'
 import fire from '../fire'
@@ -65,7 +65,6 @@ class Question extends Component {
     item.name === this.props.chosenCountry.country
       ? (answer = true)
       : (answer = false);
-    console.log(answer)
     this.props.checkAnswer(answer);    
   }
 
@@ -75,11 +74,12 @@ class Question extends Component {
     return (
       <div className="main">
         <div>
-         <h1> What country is this?</h1>
-          <div className="progress-bar-container">
-          <div className="progress-bar" style={{ width: `${(this.props.currentRound*10)-10}%` }}/>
-        </div>
-         <h3 className='score'> User Score {this.props.userScore} </h3>
+          <div className="main_question">
+              <h1 > What country is this?</h1>
+              <div className="progress-bar-container">
+              <div className="progress-bar" style={{ width: `${(this.props.currentRound*10)-10}%` }}/></div>
+              <h3 className='score'> User Score {this.props.userScore}/10 </h3>
+           </div>
           <div  className='start'>
             <div >
              

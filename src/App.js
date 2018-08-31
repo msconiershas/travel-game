@@ -8,6 +8,7 @@ import { Provider } from 'react-redux'
 import { fetchData } from './actions/fetchData'
 import Question from './components/Question'
 import StartPage from './components/StartPage'
+import CompletedPage from './components/CompletedPage'
 
 
 function getRandomNumber(min, max) {
@@ -45,7 +46,6 @@ class App extends Component {
   }
 
   componentWillMount() {
-    
     this.getItems()
     if(this.props.currentRound === -1)
         this.props.fetchData();
@@ -144,14 +144,17 @@ class App extends Component {
   }
 
   handlePage() {
-    if(this.props.fetching === true) { return <h1> Loading...</h1>}
+    if(this.props.fetching === true) { return }
     else if(this.props.currentRound === 0) {
         return <StartPage />
+    }
+    else if(this.props.currentRound === 11) {
+      return <CompletedPage />
     }
     else if(this.props.currentRound > 0) {
       return <Question />
     }
-    else {return <h1> Loading </h1>}
+    else {return }
   }
 
   getInitialState() {

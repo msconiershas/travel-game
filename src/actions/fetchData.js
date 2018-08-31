@@ -20,7 +20,7 @@ export const fetchData = () => async (dispatch) => {
 		Math.floor(Math.random() * (max - min + 1)) + min;
     console.log(random)
 	
-	ref.orderBy("random")
+	ref
         .get()
         .then(snapshots => {
            snapshots.forEach(snapshot => {
