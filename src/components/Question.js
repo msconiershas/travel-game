@@ -45,11 +45,11 @@ class Question extends Component {
   }
   nextRound(e) {
     e.preventDefault()
-    this.props.fetchData()
     if(this.state.selectionMade) {
       this.setState({ selectionMade: false});
       this.setState({udpated: true})
-      
+      this.props.fetchData()
+
     }
 
   }
@@ -112,9 +112,10 @@ class Question extends Component {
           )
         )}
         </ul>
-        <button className="next_button" onClick={this.nextRound}> Next Round</button>
+        <div className="next_button">
+        <button  onClick={this.nextRound}> Next Round</button>
          </div>
-         
+         </div>
       </div>
     )
  

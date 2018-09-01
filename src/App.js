@@ -170,22 +170,7 @@ class App extends Component {
       <div>
         {this.handlePage()}
 
-        <div className="content">
-        <form   onSubmit={this.onSubmitForm.bind(this)}   id="add-cafe-form">
-               <input type="text" value={this.state.country} name="country" placeholder="Country" onChange={this.onNameChange}></input>
-                <input type="text" value={this.state.city} name="city" placeholder="City" onChange={this.onCityChange}></input>
-                <button>Add Country</button>
-        </form>
-
-         <ul id='cafe-list'>
-                {this.state.matches.map((v,index) => {
-          return (
-             <li key={index} data-id={v.id}> <span> {v.country}</span> <span>{v.city}</span> <div onClick={this.handleDelete.bind(this, index)} >x</div> </li>
-          );
-        })}
-        </ul>
-        
-      </div>
+       
       </div>
     );
   }
